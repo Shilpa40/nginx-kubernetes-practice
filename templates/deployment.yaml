@@ -13,11 +13,11 @@ spec:
   
   selector:
     matchLabels:
-      app: doc
+      app: nginx
     template:
       metadata: 
         labels:
-          app: doc
+          app: nginx
         annotations:
           {{- toYaml .Values.podAnnotations | nindent 4 }}
         {{- end }}

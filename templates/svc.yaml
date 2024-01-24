@@ -1,12 +1,11 @@
-{{- if .Values.service.enabled -}}
-
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: {{ .Values.service.name }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: docs
+    app: nginx
     spec:
       type: {{ .Values.service.type }}
       ports:
@@ -14,5 +13,5 @@ metadata:
         - name: http
         port: {{ .Values.service.ports.http }}
       selector: 
-        app: docs
+        app: nginx
   
