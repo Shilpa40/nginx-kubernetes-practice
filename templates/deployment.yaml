@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  
+  strategy: {{- toYaml .Values.updateStrategy | nindent 4 }}
+  {{- end }}
+  
+  selector:
+    matchLabels:
+      app: doc
+    template:
+      metadata: 
+        labels:
+          app: doc
+        annotations:
+          {{- toYaml .Values.podAnnotations | nindent 4 }}
+        {{- end }}
+      spec: 
+        containers:
+        - name: nginx
+          image: {{ include "nginx.image" . }} 
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+          ports:
+            {{- if .Values.containerPorts.http }}
+            - name: http
+              containerPort: {{ .Values.containerPorts.http }}
+            {{- end }}
+        
+        
+      
