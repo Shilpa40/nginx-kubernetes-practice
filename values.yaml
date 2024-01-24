@@ -39,23 +39,23 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 ## NGINX containers' liveness probe.  
-livenessProbe:
-  enabled: true
-  initialDelaySeconds: 30
-  timeoutSeconds: 5
-  periodSeconds: 10
-  failureThreshold: 6
-  successThreshold: 1
+#livenessProbe:
+#  enabled: true
+#  initialDelaySeconds: 30
+#  timeoutSeconds: 5
+#  periodSeconds: 10
+#  failureThreshold: 6
+#  successThreshold: 1
   
 ## NGINX containers' readiness probe.
-readinessProbe:
-  enabled: true
-  initialDelaySeconds: 5
-  timeoutSeconds: 3
-  periodSeconds: 5
-  failureThreshold: 3
-  successThreshold: 1
-  
+#readinessProbe:
+#  enabled: true
+#  initialDelaySeconds: 5
+#  timeoutSeconds: 3
+#  periodSeconds: 5
+#  failureThreshold: 3
+#  successThreshold: 1
+
 podAnnotations: {
   sidecar.istio.io/rewriteAppHTTPProbers: "true"
 }
@@ -105,6 +105,7 @@ service:
   enabled: true
   type: NodePort
   port: 80
+  name: nginx-service
 
 ingress:
   enabled: false
